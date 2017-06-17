@@ -1,6 +1,15 @@
 import React from 'react';
 import MessagePreview from './MessagePreview.jsx';
+import Message from './Message.jsx';
+
 import messages from '../messages.json';
+import {
+  HashRouter,
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+
 import { browserHistory } from 'history'
 import './InboxPage.less';
 const PropTypes = require('prop-types');
@@ -11,17 +20,19 @@ export default class InboxPage extends React.Component{
       super(props, context);
       this.hanlePreview = this.hanlePreview.bind(this);
       this.state = {
-        messages
+        messages,
+        messageItem: ''
       };
     }
 
     hanlePreview(messageId){
+      this.state.massageItem = messageId;
       this.context.router.history.push(`/inbox/messages/${messageId}`)
     }
     render() {
       const { messages } = this.state;
-      console.log(this.props);
-      const { messageId: selectedMessageId} = this.props.match.params;
+      //const { messageId: selectedMessageId} = this.props.match.params;
+      const selectedMessageId = this.state.massageItem;
       return (
         <div className="InboxPage">
           <div className="messages">
@@ -37,7 +48,7 @@ export default class InboxPage extends React.Component{
             }
           </div>
           <div className="message-container">
-            {this.props.children}
+            <Route path="/inbox/messages/:messageId" component={Message}/>
           </div>
         </div>
       );

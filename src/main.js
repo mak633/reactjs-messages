@@ -29,7 +29,7 @@ ReactDOM.render(
         <Route exact path='/' component={App}/>
         <Route path="/about" component={AboutPage}/>
         <Route path="/inbox" component={InboxPage}/>
-          <Route path="/inbox/messages/:messageId" component={Message}/>
+
       </div>
     </Router>
   </HashRouter>,
